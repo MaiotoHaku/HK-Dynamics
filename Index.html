@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>HK-DYNAMICS</title>
+
+<!-- ✅ CSSをここで読み込む -->
+<link rel="stylesheet" href="load.css">
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="about.css">
+<link rel="stylesheet" href="top.css">
+<link rel="stylesheet" href="news.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+window.addEventListener("load", () => {
+  const loading = document.querySelector(".loading");
+
+  // アニメーション時間 + 1秒待つ
+  const totalAnimationTime = 1300 + 500; // 1.3秒 + 1秒
+
+  setTimeout(() => {
+    loading.classList.add("fade-out");
+
+    // フェードアウトが終わったら非表示に
+    loading.addEventListener("transitionend", () => {
+      loading.style.display = "none";
+    });
+  }, totalAnimationTime);
+});
+
+</script>
+<style>
+    html {
+      scroll-behavior: smooth; /* ← これだけでOK！ */
+    }
+</style>
+
+</head>
+<body>
+    <div class="loading">
+        <div class="lineWrapper">
+            <div class="line"></div>
+        </div>
+        <img class="hakuLogo" src="images/haku.png" alt="Logo">
+        <img class="hakuText" src="images/LogoText.png" alt="Logo">
+    </div>
+    <div class = "main">
+        <div class = "header">
+                <div class = "header-left">
+                    <img class = "header-logo" src = "images/hkdynamics.png" alt = "HK-DYNAMICS">
+                </div>
+                <div class="header-right">
+                    <div class="pentagon">
+                        <svg viewBox="0 0 120 30" class="pentagon-svg">
+                        <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                        </svg>
+                        <a href="#IDtop">Home</a>
+                    </div>
+
+                    <div class="pentagon">
+                        <svg viewBox="0 0 120 30" class="pentagon-svg">
+                        <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                        </svg>
+                        <a href="#">Portfolio</a>
+                    </div>
+
+                    <div class="pentagon">
+                        <svg viewBox="0 0 120 30" class="pentagon-svg">
+                        <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                        </svg>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+            <div class = "clear"></div>
+        </div>
+
+        <div class = "top" id = "IDtop">
+            <img class = "topImage" src = "images/Header.png" alt = "head">
+        </div>
+        <div class="news">
+        <h1 class="NewsTXT">News</h1>
+        <div class="slider">
+            <div class="slides" id="slides">
+             <a href="https://hk-dynamics.booth.pm/" target="_blank">
+                <img src="images/booth.png" alt="Booth">
+             </a>
+            <a href="https://hk-dynamics.booth.pm/" target="_blank">
+                <img src="images/booth.png" alt="Booth">
+             </a>
+            <a href="https://hk-dynamics.booth.pm/" target="_blank">
+                <img src="images/booth.png" alt="Booth">
+             </a>
+            </div>
+
+            <button class="btn prev" id="prev">&#10094;</button>
+            <button class="btn next" id="next">&#10095;</button>
+        </div>
+        </div>
+
+        
+        <script>
+            const slides = document.getElementById('slides');
+            const total = slides.children.length;
+            let index = 0;
+            let timer;
+
+            function showSlide(i) {
+                index = (i + total) % total;
+                const slideWidth = document.querySelector('.slider').clientWidth;
+                slides.style.transform = `translateX(${-slideWidth * index}px)`;
+            }
+
+            function nextSlide() {
+                showSlide(index + 1);
+            }
+
+            function prevSlide() {
+                showSlide(index - 1);
+            }
+
+            document.getElementById('next').addEventListener('click', () => {
+                nextSlide();
+                resetTimer();
+            });
+
+            document.getElementById('prev').addEventListener('click', () => {
+                prevSlide();
+                resetTimer();
+            });
+
+            function startAutoSlide() {
+                timer = setInterval(nextSlide, 3000);
+            }
+
+            function resetTimer() {
+                clearInterval(timer);
+                startAutoSlide();
+            }
+
+            // 画面サイズが変わったときも位置を再計算
+            window.addEventListener('resize', () => showSlide(index));
+
+            startAutoSlide();
+        </script>
+
+        <div class="about">
+            <img class="tatie" src="images/Tatie.png" alt="立ち絵">
+            <div class="aboutTextBox">
+            
+            <h2 class="aboutTextName">舞音はく</h2>
+            <h3 class="aboutTextNameYomi">MaiotoHaku</h3>
+            <p class="aboutText">作曲・モデリング・ゲーム制作と活動</p>
+            <p class="aboutText">HK-DYNAMICS 主将</p>
+            <p class="aboutText">頭についているのは耳ではなくミキサー</p>
+            <p class="aboutText">現実の"舞音はく"とは別の存在</p>
+            </div>
+            <div class="tatieBackLine"></div>
+            <h1 class="aboutTextH">About</h1>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const aboutSections = document.querySelectorAll(".about");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                entry.target.classList.add("inview");
+                } else {
+                // 一度きりのアニメーションにしたい場合はこの行をコメントアウト
+                entry.target.classList.remove("inview");
+                }
+            });
+            },
+            { threshold: 0.3 } // 30%見えたら反応
+        );
+
+        aboutSections.forEach((el) => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

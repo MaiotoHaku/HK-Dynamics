@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.loading {
+  position: fixed;     /* 画面に固定 */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #1e1e1e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;       /* 上に表示されるように */
+  
+}
+
+.lineWrapper {
+  width: 520px;        /* 線の最終幅 */
+  height: 4px;         /* 線の高さ */
+  overflow: hidden;    /* はみ出す部分を隠す */
+  transform: translateX(240px) translateY(200px);
+
+}
+
+.line {
+  width: 0;            /* 初期は幅0 */
+  height: 100%;
+  background-color: #fff; /* 線の色 */
+  animation: drawLine 1.3s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+
+@keyframes drawLine {
+  0% {
+    width: 0;
+  }
+  38%{
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+
+.hakuText {
+  width: 700px;
+  clip-path: inset(0 100% 0 0); /* 右側を完全に隠す */
+  animation: revealText 1.3s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+
+@keyframes revealText {
+  0% {
+    opacity: 0;
+    transform: translateX(450px) translateY(-100px);
+    clip-path: inset(0 100% 0 0); /* 全部隠す */
+  }
+  38% { /* 0.5秒でフェードイン */
+    opacity: 0;
+    transform: translateX(450px) translateY(-100px);
+    clip-path: inset(0 100% 0 0); /* 全部隠す */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(150px) translateY(-100px);
+    clip-path: inset(0 0 0 0); /* 完全に表示 */
+    
+  }
+}
+
+.hakuLogo {
+  width: 400px;
+  opacity: 0;
+  transform: translateX(0) translateY(100px);
+  animation: moveLogo 1.3s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+
+@keyframes moveLogo {
+  0% {
+    opacity: 0;
+    transform: translateX(0px) translateY(100px);
+  }
+  38% { /* 0.5秒でフェードイン */
+    opacity: 1;
+    transform: translateX(0px) translateY(0px);
+  }
+  100% { /* 左にスライド */
+    opacity: 1; /* ← ここで opacity を1のまま維持 */
+    transform: translateX(-300px) translateY(0px);
+  }
+  /* フェードアウト用 */
+/* フェードアウト用 */
+}
+  .loading.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease; /* 1秒で透明に */
+  }
+
