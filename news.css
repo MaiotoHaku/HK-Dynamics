@@ -3,7 +3,8 @@
   margin-left: 2vw;
   font-size: clamp(1.5rem, 4vw, 5rem);
   line-height: 1;
-  transform: translateY(10px);
+  transform: translateY(-100%);
+
 }
 
 /* =========================
@@ -16,12 +17,13 @@
 
 .slider {
   position: relative;
-  width: 97%;
+  width: 60%;
   aspect-ratio: 1500 / 400;
   overflow: hidden;
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  margin: 3vw auto 0;
+  margin: 4vw auto 0;
+  transform: translateY(-20%);
 }
 
 .slides {

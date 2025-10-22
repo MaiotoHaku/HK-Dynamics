@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="about.css">
 <link rel="stylesheet" href="top.css">
 <link rel="stylesheet" href="news.css">
+<link rel="stylesheet" href="categories.css">
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -63,7 +64,22 @@ window.addEventListener("load", () => {
                         <svg viewBox="0 0 120 30" class="pentagon-svg">
                         <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
                         </svg>
-                        <a href="#">Portfolio</a>
+                        <a href="#IDNews">News</a>
+                    </div>
+
+
+                    <div class="pentagon">
+                        <svg viewBox="0 0 120 30" class="pentagon-svg">
+                        <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                        </svg>
+                        <a href="#IDPortfolio">Portfolio</a>
+                    </div>
+                    
+                    <div class="pentagon">
+                        <svg viewBox="0 0 120 30" class="pentagon-svg">
+                        <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                        </svg>
+                        <a href="#IDAbout">About</a>
                     </div>
 
                     <div class="pentagon">
@@ -79,25 +95,30 @@ window.addEventListener("load", () => {
         <div class = "top" id = "IDtop">
             <img class = "topImage" src = "images/Header.png" alt = "head">
         </div>
-        <div class="news">
-        <h1 class="NewsTXT">News</h1>
-        <div class="slider">
-            <div class="slides" id="slides">
-             <a href="https://hk-dynamics.booth.pm/" target="_blank">
-                <img src="images/booth.png" alt="Booth">
-             </a>
-            <a href="https://hk-dynamics.booth.pm/" target="_blank">
-                <img src="images/booth.png" alt="Booth">
-             </a>
-            <a href="https://hk-dynamics.booth.pm/" target="_blank">
-                <img src="images/booth.png" alt="Booth">
-             </a>
+        
+        <div class="news" id="IDNews">
+            <h1 class="NewsTXT">News</h1>
+            
+            <!-- 背景レイヤー -->
+            <div class="newsBack"></div>
+            
+            <div class="slider">
+                <div class="slides" id="slides">
+                    <a href="https://hk-dynamics.booth.pm/" target="_blank">
+                        <img src="images/booth.png" alt="Booth">
+                    </a>
+                    <a href="https://hk-dynamics.booth.pm/" target="_blank">
+                        <img src="images/booth.png" alt="Booth">
+                    </a>
+                    <a href="https://hk-dynamics.booth.pm/" target="_blank">
+                        <img src="images/booth.png" alt="Booth">
+                    </a>
+                </div>
+                <button class="btn prev" id="prev">&#10094;</button>
+                <button class="btn next" id="next">&#10095;</button>
             </div>
+        </div>
 
-            <button class="btn prev" id="prev">&#10094;</button>
-            <button class="btn next" id="next">&#10095;</button>
-        </div>
-        </div>
 
         
         <script>
@@ -145,7 +166,35 @@ window.addEventListener("load", () => {
             startAutoSlide();
         </script>
 
-        <div class="about">
+        <section class="portfolio-section" ID = "IDPortfolio">
+        <h2 class="portfolio-title">Portfolio</h2>
+
+        <div class="genre-tiles">
+            <div class="card_header">
+            <div class="card_back"></div>
+            <img class="card_image" src="images/3DIcon.png" alt="3D">
+            <h3 class="card_title">3D作品</h3>
+            <a class="card_lore">3D作品のカテゴリ説明</a>
+            </div>
+
+            <div class="card_header">
+            <div class="card_back"></div>
+            <img class="card_image" src="logo2.png" alt="音楽">
+            <h3 class="card_title">映画</h3>
+            <a class="card_lore">映画のカテゴリ説明</a>
+            </div>
+
+            <div class="card_header">
+            <div class="card_back"></div>
+            <img class="card_image" src="logo3.png" alt="ゲーム">
+            <h3 class="card_title">ゲーム</h3>
+            <a class="card_lore">ゲームのカテゴリ説明</a>
+            </div>
+        </div>
+        </section>
+
+
+        <div class="about" id = "IDAbout">
             <img class="tatie" src="images/Tatie.png" alt="立ち絵">
             <div class="aboutTextBox">
             
