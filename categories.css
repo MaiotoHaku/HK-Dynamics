@@ -12,30 +12,31 @@
   margin-bottom: 60px;
   position: relative;
   font-weight: bold;
-  
 }
 
 /* カード群 */
 .genre-tiles {
   display: flex;
-  justify-content: center; /* ← 中央寄せに変更 */
+  justify-content: center;
   align-items: flex-start;
-  gap: 60px; /* カードの間隔を広めに確保 */
+  gap: 60px;
   flex-wrap: wrap;
+  overflow: visible; /* 拡大画像がはみ出せるように */
 }
 
 /* カード本体 */
 .card_header {
   position: relative;
   flex: 1;
-  min-width: 320px;  /* 少し広め */
-  max-width: 420px;  /* 横のボリュームを確保 */
+  min-width: 280px;
+  max-width: 420px;
   height: 620px;
   background: #fff;
   border-radius: 20px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: black;
 }
 
 /* グレー背景部分 */
@@ -51,20 +52,32 @@
   z-index: 1;
 }
 
-/* ロゴ画像 */
+/* aタグをカードとして使うためのスタイルリセット */
+/* カードリンクの色リセット（最優先） */
+a.card_header,
+a.card_header:visited,
+a.card_header:hover,
+a.card_header:active {
+  text-decoration: none !important; /* 下線を完全に無効化 */
+  color: inherit !important;        /* 親の色を強制的に継承 */
+  display: block;                   /* ブロック化して全体をクリック可に */
+  cursor: pointer;
+}
+
 /* ロゴ画像 */
 .card_image {
   position: absolute;
-  top: 20%;          /* 常にカードの縦中央 */
-  left: 50%;         /* 横中央 */
-  transform: translate(-50%, -50%); /* 中心に配置 */
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 240px;
   height: 240px;
   object-fit: contain;
   z-index: 2;
   transition: transform 0.3s ease;
-  transform-origin: center center; /* 中心拡大 */
+  transform-origin: center center;
 }
+
 /* タイトル */
 .card_title {
   position: absolute;
@@ -76,17 +89,6 @@
   z-index: 3;
 }
 
-/* 説明文 */
-.card_lore {
-  position: absolute;
-  bottom: 35px;
-  width: 100%;
-  text-align: center;
-  color: #1e1e1e;
-  font-size: 17px;
-  z-index: 3;
-}
-
 /* ホバー時の動き */
 .card_header:hover {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
@@ -94,15 +96,48 @@
 }
 
 .card_header:hover .card_image {
-  transform: translate(-50%, -50%) scale(1.3); /* translateで位置を維持しつつ拡大 */
+  transform: translate(-50%, -50%) scale(1.3);
 }
 
-/* 小さい画面では折り返す */
+/* 中サイズ画面 (タブレット) */
 @media (max-width: 1100px) {
   .genre-tiles {
     justify-content: center;
+    gap: 40px;
   }
   .card_header {
     max-width: 80%;
+    height: 540px;
+  }
+  .card_image {
+    width: 200px;
+    height: 200px;
+  }
+  .card_title {
+    font-size: 22px;
+  }
+  .card_lore {
+    font-size: 15px;
+  }
+}
+
+/* 小サイズ画面 (スマホ) */
+@media (max-width: 600px) {
+  .genre-tiles {
+    gap: 30px;
+  }
+  .card_header {
+    max-width: 90%;
+    height: 460px;
+  }
+  .card_image {
+    width: 160px;
+    height: 160px;
+  }
+  .card_title {
+    font-size: 20px;
+  }
+  .card_lore {
+    font-size: 14px;
   }
 }

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>HK-DYNAMICS</title>
+
+<!-- ✅ CSSをここで読み込む -->
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="Pages/Music/music.css">
+
+<style>
+    html {
+      scroll-behavior: smooth; /* ← これだけでOK！ */
+    }
+</style>
+
+</head>
+<body>
+  <div class = "main">
+    <div class = "header">
+            <div class = "header-left">
+                <img class = "header-logo" src = "images/hkdynamics.png" alt = "HK-DYNAMICS">
+            </div>
+            <div class="header-right">
+                <div class="pentagon">
+                    <svg viewBox="0 0 120 30" class="pentagon-svg">
+                    <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                    </svg>
+                    <a href="#IDtop">Home</a>
+                </div>
+
+                <div class="pentagon">
+                    <svg viewBox="0 0 120 30" class="pentagon-svg">
+                    <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                    </svg>
+                    <a href="#IDNews">News</a>
+                </div>
+
+
+                <div class="pentagon">
+                    <svg viewBox="0 0 120 30" class="pentagon-svg">
+                    <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                    </svg>
+                    <a href="#IDPortfolio">Portfolio</a>
+                </div>
+                
+                <div class="pentagon">
+                    <svg viewBox="0 0 120 30" class="pentagon-svg">
+                    <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                    </svg>
+                    <a href="#IDAbout">About</a>
+                </div>
+
+                <div class="pentagon">
+                    <svg viewBox="0 0 120 30" class="pentagon-svg">
+                    <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                    </svg>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        <div class = "clear"></div>
+    </div>
+    <main>
+      <h1 class = "gH">Works</div>
+      <div class="gallery">
+        <div class="album" data-id="song1">
+          <img src="Pages/JC/LF500.png" alt="Song 1">
+        </div>
+      </div>
+    </main>
+
+    <div class="details-panel" id="details">
+      <div class="black-transition" id="blackTrans"></div>
+      <div class="details-content" id="detailsContent" aria-hidden="true">
+        <div class="song-card">
+          <h2 id="title"></h2>
+          <p id="info"></p>
+          <div class="embeds">
+            <div id="scEmbed"></div>
+            <div id="ytEmbed"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+      const songs = {
+        song1: {
+          title: "Limited Frequency",
+          info: "舞音はく",
+          youtubeEmbed: "https://www.youtube.com/embed/xxxxx",
+          soundcloudEmbed: `
+            <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
+              src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2182621447&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+            </iframe>
+            <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
+              <a href="https://soundcloud.com/hakumai-yukkuri" title="舞音はく" target="_blank" style="color:#cccccc;text-decoration:none;">舞音はく</a> · 
+              <a href="https://soundcloud.com/hakumai-yukkuri/limited-frequency" title="Limited Frequency" target="_blank" style="color:#cccccc;text-decoration:none;">Limited Frequency</a>
+            </div>
+          `
+        }
+      };
+
+      const albums = Array.from(document.querySelectorAll(".album"));
+      const panel = document.getElementById("details");
+      const titleEl = document.getElementById("title");
+      const infoEl = document.getElementById("info");
+      const ytEmbed = document.getElementById("ytEmbed");
+      const scEmbed = document.getElementById("scEmbed");
+      const detailsContent = document.getElementById("detailsContent");
+
+      albums.forEach(album=>{
+        album.addEventListener("click", ()=>{
+          const id = album.dataset.id;
+          const song = songs[id];
+          if(!song) return;
+
+          albums.forEach(a=>a.classList.remove("active"));
+          album.classList.add("active");
+
+          panel.classList.add("active");
+
+          titleEl.textContent = song.title;
+          infoEl.textContent = song.info;
+
+          // YouTube埋め込み
+          ytEmbed.innerHTML = `<iframe class="youtube" width="100%" height="215" src="${song.youtubeEmbed}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+          
+          // SoundCloud埋め込み（iframe + 下にリンクテキスト）
+          scEmbed.innerHTML = song.soundcloudEmbed;
+
+          detailsContent.setAttribute("aria-hidden","false");
+        });
+      });
+
+      // パネルクリックで閉じる
+      panel.addEventListener("click", ev=>{
+        if(ev.target.closest(".details-content")) return;
+        panel.classList.remove("active");
+        albums.forEach(a=>a.classList.remove("active"));
+        ytEmbed.innerHTML = '';
+        scEmbed.innerHTML = '';
+        detailsContent.setAttribute("aria-hidden","true");
+      });
+
+      // ESCで閉じる
+      window.addEventListener("keydown", e=>{
+        if(e.key==="Escape"){
+          panel.classList.remove("active");
+          albums.forEach(a=>a.classList.remove("active"));
+          ytEmbed.innerHTML = '';
+          scEmbed.innerHTML = '';
+          detailsContent.setAttribute("aria-hidden","true");
+        }
+      });
+
+    </script>
+</body>
+</html>
