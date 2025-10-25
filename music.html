@@ -69,12 +69,17 @@
         <div class="album" data-id="song1">
           <img src="Pages/JC/LF500.png" alt="Song 1">
         </div>
+        <div class="album" data-id="song2">
+          <img src="Pages/JC/polytopeTitle.png" alt="Song 2">
+        </div>
       </div>
     </main>
 
     <div class="details-panel" id="details">
       <div class="black-transition" id="blackTrans"></div>
+      <button class="close-btn" id="closeBtn">×</button>  <!-- ← 追加 -->
       <div class="details-content" id="detailsContent" aria-hidden="true">
+        
         <div class="song-card">
           <h2 id="title"></h2>
           <p id="info"></p>
@@ -102,7 +107,21 @@
               <a href="https://soundcloud.com/hakumai-yukkuri/limited-frequency" title="Limited Frequency" target="_blank" style="color:#cccccc;text-decoration:none;">Limited Frequency</a>
             </div>
           `
-        }
+        },
+        song2: {
+          title: "POLYTOPE",
+          info: "舞音はく",
+          youtubeEmbed: "https://www.youtube.com/embed/xxxxx",
+          soundcloudEmbed: `
+            <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+              src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2198676359&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+            </iframe>
+            <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
+              <a href="https://soundcloud.com/hakumai-yukkuri" title="舞音はく" target="_blank" style="color:#cccccc;text-decoration:none;">舞音はく</a> · 
+              <a href="https://soundcloud.com/hakumai-yukkuri/polytope" title="POLYTOPE" target="_blank" style="color:#cccccc;text-decoration:none;">POLYTOPE</a>
+            </div>
+          `
+        },
       };
 
       const albums = Array.from(document.querySelectorAll(".album"));
@@ -113,13 +132,13 @@
       const scEmbed = document.getElementById("scEmbed");
       const detailsContent = document.getElementById("detailsContent");
 
-      albums.forEach(album=>{
-        album.addEventListener("click", ()=>{
+      albums.forEach(album => {
+        album.addEventListener("click", () => {
           const id = album.dataset.id;
           const song = songs[id];
-          if(!song) return;
+          if (!song) return;
 
-          albums.forEach(a=>a.classList.remove("active"));
+          albums.forEach(a => a.classList.remove("active"));
           album.classList.add("active");
 
           panel.classList.add("active");
@@ -130,34 +149,34 @@
           // YouTube埋め込み
           ytEmbed.innerHTML = `<iframe class="youtube" width="100%" height="215" src="${song.youtubeEmbed}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
           
-          // SoundCloud埋め込み（iframe + 下にリンクテキスト）
+          // SoundCloud埋め込み
           scEmbed.innerHTML = song.soundcloudEmbed;
 
-          detailsContent.setAttribute("aria-hidden","false");
+          detailsContent.setAttribute("aria-hidden", "false");
         });
       });
 
-      // パネルクリックで閉じる
-      panel.addEventListener("click", ev=>{
-        if(ev.target.closest(".details-content")) return;
+      // ✅ ×ボタンで閉じる処理
+      const closeBtn = document.getElementById("closeBtn");
+      closeBtn.addEventListener("click", () => {
         panel.classList.remove("active");
-        albums.forEach(a=>a.classList.remove("active"));
+        albums.forEach(a => a.classList.remove("active"));
         ytEmbed.innerHTML = '';
         scEmbed.innerHTML = '';
-        detailsContent.setAttribute("aria-hidden","true");
+        detailsContent.setAttribute("aria-hidden", "true");
       });
 
-      // ESCで閉じる
-      window.addEventListener("keydown", e=>{
-        if(e.key==="Escape"){
+      // ✅ ESCキーで閉じる処理（そのまま維持）
+      window.addEventListener("keydown", e => {
+        if (e.key === "Escape") {
           panel.classList.remove("active");
-          albums.forEach(a=>a.classList.remove("active"));
+          albums.forEach(a => a.classList.remove("active"));
           ytEmbed.innerHTML = '';
           scEmbed.innerHTML = '';
-          detailsContent.setAttribute("aria-hidden","true");
+          detailsContent.setAttribute("aria-hidden", "true");
         }
       });
-
     </script>
+
 </body>
 </html>
