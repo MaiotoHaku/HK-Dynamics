@@ -50,7 +50,9 @@ window.addEventListener("load", () => {
     <div class = "main">
         <div class = "header">
                 <div class = "header-left">
-                    <img class = "header-logo" src = "images/hkdynamics.png" alt = "HK-DYNAMICS" href = "index.html">
+                    <a href="index.html">
+                        <img class="header-logo" src="images/hkdynamics.png" alt="HK-DYNAMICS">
+                    </a>
                 </div>
                 <div class="header-right">
                     <div class="pentagon">
@@ -65,6 +67,13 @@ window.addEventListener("load", () => {
                         <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
                         </svg>
                         <a href="music.html">Music</a>
+                    </div>
+
+                    <div class="pentagon">
+                        <svg viewBox="0 0 120 30" class="pentagon-svg">
+                        <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                        </svg>
+                        <a href="model.html">Model</a>
                     </div>
                 </div>
             <div class = "clear"></div>
@@ -148,11 +157,11 @@ window.addEventListener("load", () => {
         <h2 class="portfolio-title">Portfolio</h2>
 
         <div class="genre-tiles">
-            <div class="card_header">
+            <a href = "model.html" class="card_header">
             <div class="card_back"></div>
-            <img class="card_image" src="images/3DIcon.png" alt="3D">
-            <h3 class="card_title">3D作品(CommingSoon)</h3>
-            </div>
+            <img class="card_image"  src="images/3DIcon.png" alt="音楽">
+            <h3 class="card_title">3Dモデル</h3>
+            </a>
 
             <a href = "music.html" class="card_header">
             <div class="card_back"></div>
@@ -182,6 +191,20 @@ window.addEventListener("load", () => {
             </div>
             <div class="tatieBackLine"></div>
             <h1 class="aboutTextH">About</h1>
+            <div class="socialLinks">
+                <a href="https://soundcloud.com/maioto-haku" target="_blank" class="socialIcon">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/soundcloud.svg" alt="SoundCloud">
+                </a>
+                <a href="https://www.youtube.com/@Maiotohaku" target="_blank" class="socialIcon">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" alt="YouTube">
+                </a>
+                <a href="https://x.com/MaiotoHaku" target="_blank" class="socialIcon">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" alt="YouTube">
+                </a>
+                <a href="https://hk-dynamics.booth.pm/" target="_blank" class="boothLink" title="BOOTH">
+                    BOOTH
+                </a>
+            </div>
         </div>
     </div>
     <script>

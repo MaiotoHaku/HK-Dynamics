@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>HK-DYNAMICS</title>
+
+<!-- ✅ CSSをここで読み込む -->
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="Pages/Model/model.css">
+
+<style>
+    html {
+      scroll-behavior: smooth; /* ← これだけでOK！ */
+    }
+</style>
+
+</head>
+<body>
+    <dev class = "main">
+        <div class = "header">
+            <div class = "header-left">
+                <img class = "header-logo" src = "images/hkdynamics.png" alt = "HK-DYNAMICS" >
+            </div>
+            <div class="header-right">
+                <div class="pentagon">
+                    <svg viewBox="0 0 120 30" class="pentagon-svg">
+                    <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                    </svg>
+                    <a href="index.html">Home</a>
+                </div>
+
+                <div class="pentagon">
+                    <svg viewBox="0 0 120 30" class="pentagon-svg">
+                    <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                    </svg>
+                    <a href="music.html">Music</a>
+                </div>
+                <div class="pentagon">
+                    <svg viewBox="0 0 120 30" class="pentagon-svg">
+                    <polygon points="0,0 120,0 120,20 110,30 0,30" fill="none" stroke="black" stroke-width="3"/>
+                    </svg>
+                    <a href="model.html">Model</a>
+                </div>
+            </div>
+        <div class = "clear"></div>
+    </div>
+    <h1 class = "modelH">Works</h1>
+    <div class="grid">
+        
+        <div class="grid-sizer"></div>
+        <div class="grid-item"><img src="Models/Camera.png" alt=""></div>
+        <div class="grid-item"><img src="Models/GN.png" alt=""></div>
+        <div class="grid-item"><img src="Models/Guitor.png" alt=""></div>
+    </div>
+    <div class="overlay" id="overlay">
+        <span class="close-btn" id="closeOverlay">&times;</span>
+        <img id="overlayImage" src="" alt="">
+    </div>
+
+
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+  <script>
+   const grid = document.querySelector('.grid');
+
+    // Masonry 初期化（画像読み込み後）
+    imagesLoaded(grid, function() {
+      new Masonry(grid, {
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        percentPosition: true,
+        gutter: 10
+      });
+    });
+
+    // === ふわっと拡大オーバーレイ ===
+    const overlay = document.getElementById('overlay');
+    const overlayImage = document.getElementById('overlayImage');
+    const closeOverlay = document.getElementById('closeOverlay');
+
+    document.querySelectorAll('.grid-item img').forEach(img => {
+      img.addEventListener('click', () => {
+        overlayImage.src = img.src;
+        overlay.classList.add('active');
+      });
+    });
+
+    // 閉じる処理
+    function close() {
+      overlay.classList.remove('active');
+      setTimeout(() => overlayImage.src = '', 300); // アニメ後にクリア
+    }
+
+    closeOverlay.addEventListener('click', close);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+
+    // Escキーでも閉じる
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  </script>
+
+</body>
+</head>

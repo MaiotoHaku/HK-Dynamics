@@ -30,6 +30,7 @@
   margin-left: 10%;
   z-index: 2;
   opacity: 1;
+  pointer-events: none;
 }
 
 /* テキストボックス（右側） */
@@ -121,4 +122,43 @@
   opacity: 1;
   transform: translateX(0);
   transition-delay: 0.8s;
+}
+
+.socialLinks {
+  margin-top: 26%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-left: -5%;
+}
+
+
+/* アイコン共通設定 */
+.socialIcon img {
+  width: 40px;
+  height: 40px;
+  opacity: 0.8;
+  transition: transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+  filter: invert(1); /* 白化（暗い背景に合う） */
+}
+
+.socialIcon img:hover {
+  transform: scale(1.15);
+  opacity: 1;
+  filter: invert(1) drop-shadow(0 0 4px white);
+}
+
+/* BOOTHリンク（文字） */
+.boothLink {
+  position: relative; /* これで重なりの干渉を防ぐ */
+  z-index: 6;         /* 確実に前面 */
+  font-size: 1.1rem;
+  color: white;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, text-shadow 0.2s ease;
+}
+.boothLink:hover {
+  opacity: 1;
+  text-shadow: 0 0 6px white;
 }
